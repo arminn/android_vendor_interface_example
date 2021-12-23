@@ -1,0 +1,5 @@
+service epam.virt-1-0 /vendor/bin/hw/epam.virt@1.0-service
+    interface epam.virt@1.0::IVirt default
+    class hal
+    user system
+    group system
