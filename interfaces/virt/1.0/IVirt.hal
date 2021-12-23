@@ -2,4 +2,4 @@ package epam.virt@1.0;
 
 interface IVirt {
 	oneway init();
-}
+};
