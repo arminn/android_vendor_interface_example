@@ -1,0 +1,16 @@
+type hal_epam_virt, domain;
+
+type hal_epam_virt_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(hal_epam_virt)
+vndbinder_use(hal_epam_virt)
+
+# add_hwservice
+
+allow hal_epam_virt hal_epam_virt_hwservice:hwservice_manager {find add};
+
+allow hal_epam_virt hwservicemanager_prop:file read;
+allow hal_epam_virt hwservicemanager_prop:file open;
+allow hal_epam_virt hwservicemanager:binder { call transfer };
+allow hal_epam_virt hwservicemanager_prop:file { getattr map };
+allow hal_epam_virt hidl_base_hwservice:hwservice_manager add;

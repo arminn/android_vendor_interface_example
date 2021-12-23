@@ -1,0 +1,3 @@
+# type hal_epam_virt_hwservice, hwservice_manager_type, vendor_hwservice_type;
+# type hal_epam_virt_hwservice, hwservice_manager_type, coredomain_hwservice, protected_hwservice;
+type hal_epam_virt_hwservice, hwservice_manager_type, protected_hwservice;
