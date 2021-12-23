@@ -1,0 +1,4 @@
+service vendor.epam_virt /vendor/bin/hw/epam.virt-service
+    class hal
+    user system
+    group system
