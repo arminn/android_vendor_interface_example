@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2021 EPAM Systems Inc.
  *
  * Licensed under the Apache License, Version 2.1 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,13 +19,12 @@
 
 #include <epam/virt/1.0/IVirt.h>
 #include <hidl/HidlTransportSupport.h>
+#include <binder/ProcessState.h>
 
 #include "Virt.h"
 
 using android::hardware::configureRpcThreadpool;
 using android::hardware::joinRpcThreadpool;
-//using android::hardware::authsecret::V1_0::IAuthSecret;
-//using android::hardware::authsecret::V1_0::implementation::AuthSecret;
 using epam::virt::implementation::Virt;
 using epam::virt::V1_0::IVirt;
 using android::sp;
@@ -32,12 +32,14 @@ using android::status_t;
 using android::OK;
 
 int main() {
-    configureRpcThreadpool(1, true);
-
+    android::ProcessState::initWithDriver("/dev/vndbinder");
+    android::ProcessState::self()->setThreadPoolMaxThreadCount(4);
+    android::ProcessState::self()->startThreadPool();
+    android::hardware::configureRpcThreadpool(4, true /* will join */);
     sp<IVirt> v = new Virt;
     status_t status = v->registerAsService();
     LOG_ALWAYS_FATAL_IF(status != OK, "Could not register IVirt .....");
-
+    ALOGI("IVirt registered !");
     joinRpcThreadpool();
     return 0;
 }
