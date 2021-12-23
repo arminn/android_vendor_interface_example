@@ -1,0 +1,5 @@
+hidl_package_root {
+ name: "epam",
+ use_current: true,
+}
+
