@@ -1,0 +1,24 @@
+// This is the expected build file, but it may not be right in all cases
+
+aidl_interface {
+    name: "epam.virt",
+    vendor_available: true,
+    srcs: ["epam/virt/*.aidl"],
+    stability: "vintf",
+    backend: {
+        cpp: {
+            // FIXME should this be disabled?
+            // prefer NDK backend which can be used anywhere
+            enabled: true,
+        },
+        java: {
+            sdk_version: "module_current",
+        },
+        ndk: {
+            vndk: {
+                enabled: true,
+            },
+        },
+    },
+}
+
